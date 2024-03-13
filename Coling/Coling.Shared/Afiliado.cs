@@ -35,5 +35,5 @@ public partial class Afiliado
     public virtual Persona IdpersonaNavigation { get; set; } = null!;
 
     [InverseProperty("IdafiliadoNavigation")]
-    public virtual ICollection<Profesionafiliado> Profesionafiliados { get; set; } = new List<Profesionafiliado>();
+    public virtual ICollection<ProfesionAfiliado> Profesionafiliados { get; set; } = new List<ProfesionAfiliado>();
 }

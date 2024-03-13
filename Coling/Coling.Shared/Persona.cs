@@ -42,7 +42,7 @@ public partial class Persona
     public virtual ICollection<Direccion> Direcciones { get; set; } = new List<Direccion>();
 
     [InverseProperty("IdpersonaNavigation")]
-    public virtual ICollection<PersonatipoSocial> PersonatipoSociales { get; set; } = new List<PersonatipoSocial>();
+    public virtual ICollection<PersonaTipoSocial> PersonatipoSociales { get; set; } = new List<PersonaTipoSocial>();
 
     [InverseProperty("IdpersonaNavigation")]
     public virtual ICollection<Telefono> Telefonos { get; set; } = new List<Telefono>();

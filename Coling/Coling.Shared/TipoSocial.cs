@@ -21,5 +21,5 @@ public partial class TipoSocial
     public string Estado { get; set; } = null!;
 
     [InverseProperty("IdtiposocialNavigation")]
-    public virtual ICollection<PersonatipoSocial> PersonatipoSociales { get; set; } = new List<PersonatipoSocial>();
+    public virtual ICollection<PersonaTipoSocial> PersonatipoSociales { get; set; } = new List<PersonaTipoSocial>();
 }
