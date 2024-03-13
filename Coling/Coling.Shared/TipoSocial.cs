@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Coling.Shared.Models;
 
@@ -22,5 +21,5 @@ public partial class TipoSocial
     public string Estado { get; set; } = null!;
 
     [InverseProperty("IdtiposocialNavigation")]
-    public virtual ICollection<PersonatipoSocial> PersonatipoSocials { get; set; } = new List<PersonatipoSocial>();
+    public virtual ICollection<PersonatipoSocial> PersonatipoSociales { get; set; } = new List<PersonatipoSocial>();
 }

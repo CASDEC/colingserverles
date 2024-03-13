@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Coling.Shared.Models;
 
 [Table("profesionafiliado")]
-public partial class Profesionafiliado
+public partial class ProfesionAfiliado
 {
     [Key]
     [Column("id")]

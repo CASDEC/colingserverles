@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Coling.Shared.Models;
 
@@ -24,6 +23,6 @@ public partial class Direccion
     public string? Estado { get; set; }
 
     [ForeignKey("Idpersona")]
-    [InverseProperty("Direccions")]
+    [InverseProperty("Direcciones")]
     public virtual Persona IdpersonaNavigation { get; set; } = null!;
 }

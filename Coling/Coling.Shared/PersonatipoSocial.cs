@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Coling.Shared.Models;
 
 [Table("personatipoSocial")]
-public partial class PersonatipoSocial
+public partial class PersonaTipoSocial
 {
     [Key]
     [Column("id")]
@@ -24,10 +23,10 @@ public partial class PersonatipoSocial
     public string? Estado { get; set; }
 
     [ForeignKey("Idpersona")]
-    [InverseProperty("PersonatipoSocials")]
+    [InverseProperty("PersonatipoSociales")]
     public virtual Persona IdpersonaNavigation { get; set; } = null!;
 
     [ForeignKey("Idtiposocial")]
-    [InverseProperty("PersonatipoSocials")]
+    [InverseProperty("PersonatipoSociales")]
     public virtual TipoSocial IdtiposocialNavigation { get; set; } = null!;
 }
