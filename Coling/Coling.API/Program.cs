@@ -21,6 +21,7 @@ var host = new HostBuilder()
         services.ConfigureFunctionsApplicationInsights();
         services.AddDbContext<Contexto>(options => options.UseSqlServer(
                      configuration.GetConnectionString("cadena")));
+
         services.AddScoped<IAfiliadoLogic, AfiliadoLogic>();
         services.AddScoped<IDireccionLogic, DireccionLogic>();
         services.AddScoped<IPersonaLogic, PersonaLogic>();
