@@ -1,6 +1,7 @@
 using Azure.Data.Tables;
 using Coling.API.Curriculum.Contratos.Repositorios;
 using Coling.API.Curriculum.Implementacion.Repositorios;
+using Coling.Utilitarios.Middlewares;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ var host = new HostBuilder()
             string cadenaConexion = configuration.GetConnectionString("cadena");
             return new Repositorio(cadenaConexion);
         });
+        services.AddSingleton<JwtMIddleware>();
     })
     .Build();
 
