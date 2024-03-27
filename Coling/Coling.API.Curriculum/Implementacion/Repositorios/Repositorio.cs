@@ -18,8 +18,6 @@ namespace Coling.API.Curriculum.Implementacion.Repositorios
     public class Repositorio : IRepositorio
     {
         private string cadenaConexion;
-
-
         public Repositorio(string cadena)
         {
             this.cadenaConexion = cadena;
@@ -29,13 +27,14 @@ namespace Coling.API.Curriculum.Implementacion.Repositorios
         {
             var tabla = new TableClient(cadenaConexion, tmodelo.GetType().Name);
             await tabla.CreateIfNotExistsAsync();
+            tmodelo.PartitionKey = tmodelo.GetType().Name + "es";
 
-            
             var entidad = await tabla.GetEntityAsync<TableEntity>(tmodelo.PartitionKey, tmodelo.RowKey);
             if (entidad.Value != null)
             {
                 tmodelo.ETag = entidad.Value.ETag;
                 await tabla.UpdateEntityAsync(tmodelo, tmodelo.ETag);
+                
                 return true;
             }
             else
@@ -48,6 +47,7 @@ namespace Coling.API.Curriculum.Implementacion.Repositorios
         {
             var tabla = new TableClient(cadenaConexion, tmodelo.GetType().Name);
             tabla.CreateIfNotExistsAsync();
+            tmodelo.PartitionKey = tmodelo.GetType().Name + "es";
             await tabla.DeleteEntityAsync(tmodelo.PartitionKey, tmodelo.RowKey);
             return true;
         }
@@ -80,10 +80,15 @@ namespace Coling.API.Curriculum.Implementacion.Repositorios
         public async Task<TableEntity> ListarUno<T>(T tmodelo) where T : ITableEntity
         {
             var tabla = new TableClient(cadenaConexion, typeof(T).Name);
-            tabla.CreateIfNotExistsAsync();
-            var filtro = $"Partitionkey eq '{tmodelo.GetType().Name}es' and Rowkey eq '{tmodelo.RowKey}'";
-            var data = tabla.GetEntityAsync<TableEntity>(tmodelo.PartitionKey, tmodelo.RowKey);
-            return data.Result;
+            tabla.CreateIfNotExists();
+            tmodelo.PartitionKey = tmodelo.GetType().Name + "es";
+            var exist = await tabla.GetEntityIfExistsAsync<TableEntity>(tmodelo.PartitionKey, tmodelo.RowKey);
+            if (exist.HasValue)
+            {
+                var data = await tabla.GetEntityAsync<TableEntity>(tmodelo.PartitionKey, tmodelo.RowKey);
+                return data;
+            }
+            return null;
         }
 
     }
